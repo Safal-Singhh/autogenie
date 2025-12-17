@@ -1,3 +1,4 @@
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI
 from pydantic import BaseModel
 import numpy as np
@@ -5,7 +6,13 @@ import joblib
 import os
 
 app = FastAPI(title="AutoGenie ML Inference API")
-
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # for hackathon/demo
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 # ----------------------------------
 # Safe absolute paths (Render-ready)
 # ----------------------------------
